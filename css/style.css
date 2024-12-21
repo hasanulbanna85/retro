@@ -1,0 +1,23 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,100..900&family=Mulish:wght@200..1000&display=swap');
+
+body{
+    font-family: mulish;
+}
+.banner{
+    background-color: #12132D;
+    background-image: url('../images/bgbanner.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 35px;
+}
+
+.inter-font{
+    font-family: inter;
+}
+
+.testc{
+    color:aquamarine;
+    margin: 0;
+    padding: 0;
+}
