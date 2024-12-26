@@ -15,12 +15,21 @@ const displayPosts = posts => {
     // single post card
     posts.forEach(post => {
         // console.log(post);
+
+        let indicatorColor;
+        if(post.isActive === true){
+            indicatorColor = 'bg-green-500';
+        }
+        else{
+            indicatorColor = 'bg-red-500';
+        }
+        // badge-secondary
         const postCard = document.createElement('div');
         postCard.classList = `flex bg-gray-100 mr-3 py-10 pl-10 pr-16 rounded-3xl shadow-lg mb-6`
         postCard.innerHTML = `
         <div class="profile-picture">
             <div class="indicator">
-                <span id = "indicator-color" class="indicator-item badge badge-secondary"></span>
+                <span class="indicator-item badge ${indicatorColor}"></span>
                 <div class="bg-base-300 grid h-20 w-20 rounded-xl place-items-center">
                     <img src="${post.image}" alt="">
                 </div>
@@ -47,8 +56,20 @@ const displayPosts = posts => {
             </div>
         </div>
         `;
+
         postsContainer.appendChild(postCard);
-    })
+
+        // const indicatorColor = document.getElementById('indicator-color');
+        // if(post.isActive === true){
+        //     indicatorColor.classList.add('badge-success');
+        //     console.log('primary');
+        // }
+        // else{
+        //     indicatorColor.classList.add('badge-danger');
+        //     console.log('error');
+        // }
+
+    });
 }
 
 // handle search button
