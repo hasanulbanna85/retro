@@ -2,7 +2,7 @@ const loadPost = async (searchText = 'coding') => {
     const res = await fetch(`https://openapi.programming-hero.com/api/retro-forum/posts?category=${searchText}`);
     const data = await res.json();
     const posts = data.posts;
-    // console.log(posts)
+    // console.log(posts);
     displayPosts(posts);
 }
 
@@ -31,7 +31,7 @@ const displayPosts = posts => {
             <div class="indicator">
                 <span class="indicator-item badge ${indicatorColor}"></span>
                 <div class="bg-base-300 grid h-20 w-20 rounded-xl place-items-center">
-                    <img src="${post.image}" alt="">
+                    <img class="rounded-xl" src="${post.image}" alt="">
                 </div>
             </div>
         </div>
@@ -58,17 +58,6 @@ const displayPosts = posts => {
         `;
 
         postsContainer.appendChild(postCard);
-
-        // const indicatorColor = document.getElementById('indicator-color');
-        // if(post.isActive === true){
-        //     indicatorColor.classList.add('badge-success');
-        //     console.log('primary');
-        // }
-        // else{
-        //     indicatorColor.classList.add('badge-danger');
-        //     console.log('error');
-        // }
-
     });
 }
 
@@ -108,4 +97,46 @@ const postRead = async (id) => {
     markRead.appendChild(markReadTitle);
 }
 
-loadPost()
+loadPost();
+
+const loadLatestPost = async() =>{
+    const res = await fetch('https://openapi.programming-hero.com/api/retro-forum/latest-posts');
+    const data = await res.json();
+    console.log(data);
+    displayLatestPost(data);
+}
+
+// display latest post
+const displayLatestPost = posts =>{
+    const latestPostCardContainer = document.getElementById('latest-post-continer');
+
+    posts.forEach(post => {
+        const latestPostCard = document.createElement('div');
+        latestPostCard.classList =`flex gap-5 mt-12`;
+        latestPostCard.innerHTML=`
+        <div class="card bg-base-200 w-90 shadow-xl">
+                    <figure class="px-5 pt-5">
+                        <img src="${post.cover_image}" alt=""
+                            class="rounded-xl" />
+                    </figure>
+                    <div class="card-body space-y-2">
+                        <p class="text-gray-500"><i class="fa-regular fa-calendar"></i> <span class="ml-2">${post?.author?.posted_date || 'No publish date'}</span></p>
+                        <h2 class="card-title text-lg font-extrabold">${post.title}</h2>
+                        <p class="text-gray-500">${post.description}</p>
+                        <div class="flex">
+                            <div class="w-12 h-12 rounded-full overflow-hidden mr-5">    
+                                <img src="${post.profile_image}" alt="">
+                            </div>
+                            <div>
+                                <p class="font-bold">${post.author.name}</p>
+                                <p class="text-sm text-gray-500">${post?.author?.designation || 'Unknown'}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        `; 
+
+        latestPostCardContainer.appendChild(latestPostCard);
+    });
+}
+loadLatestPost();
