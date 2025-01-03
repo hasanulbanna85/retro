@@ -69,7 +69,9 @@ const handleSearch = () => {
 }
 
 // mark as read side bar card
+let count = 0;
 const postRead = async (id) => {
+    count++;
     // console.log(id);
     const res = await fetch('https://openapi.programming-hero.com/api/retro-forum/posts');
     const data = await res.json();
@@ -86,6 +88,9 @@ const postRead = async (id) => {
     }
     // console.log(view);
     // console.log(title);
+
+    const markAsRead = document.getElementById('mark-as-read');
+    markAsRead.innerText = `Mark as read (${count})`;
 
     const markRead = document.getElementById('mark-read');
     const markReadTitle = document.createElement('div');
